@@ -51,6 +51,7 @@ abstract public class DatabaseModel
      */
     protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
+	@SuppressWarnings("overloads")
     protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
         Database database = transactionDatabase.get();
         if(database!=null) {
@@ -68,6 +69,7 @@ abstract public class DatabaseModel
         }
     }
 
+	@SuppressWarnings("overloads")
     protected void executeTransaction(DatabaseRunnable runnable) throws SQLException {
         Database database = transactionDatabase.get();
         if(database!=null) {
