@@ -36,61 +36,61 @@ abstract public class DatabaseModel
 	extends AbstractModel
 {
 
-    /**
-     * Gets the underlying database that should be used at this moment in time.
-     * It is possible that the database will change in an fail-over state.
-     * Within a single transaction, however, the database returned must be the
-     * same.
-     */
-    abstract protected Database getDatabase() throws SQLException;
+	/**
+	 * Gets the underlying database that should be used at this moment in time.
+	 * It is possible that the database will change in an fail-over state.
+	 * Within a single transaction, however, the database returned must be the
+	 * same.
+	 */
+	abstract protected Database getDatabase() throws SQLException;
 
-    /**
-     * Uses a ThreadLocal to make sure an entire transaction is executed against the same
-     * underlying database.  This way, nothing funny will happen if master/slave databases
-     * are switched mid-transaction.
-     */
-    protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
-
-	@SuppressWarnings("overloads")
-    protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
-        Database database = transactionDatabase.get();
-        if(database!=null) {
-            // Reuse current database
-            return database.executeTransaction(callable);
-        } else {
-            // Get database
-            database=getDatabase();
-            transactionDatabase.set(database);
-            try {
-                return database.executeTransaction(callable);
-            } finally {
-                transactionDatabase.remove();
-            }
-        }
-    }
+	/**
+	 * Uses a ThreadLocal to make sure an entire transaction is executed against the same
+	 * underlying database.  This way, nothing funny will happen if master/slave databases
+	 * are switched mid-transaction.
+	 */
+	protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
 	@SuppressWarnings("overloads")
-    protected void executeTransaction(DatabaseRunnable runnable) throws SQLException {
-        Database database = transactionDatabase.get();
-        if(database!=null) {
-            // Reuse current database
-            database.executeTransaction(runnable);
-        } else {
-            // Get database
-            database=getDatabase();
-            transactionDatabase.set(database);
-            try {
-                database.executeTransaction(runnable);
-            } finally {
-                transactionDatabase.remove();
-            }
-        }
-    }
+	protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
+		Database database = transactionDatabase.get();
+		if(database!=null) {
+			// Reuse current database
+			return database.executeTransaction(callable);
+		} else {
+			// Get database
+			database=getDatabase();
+			transactionDatabase.set(database);
+			try {
+				return database.executeTransaction(callable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
 
-    @Override
-    public void executeTransaction(final Runnable runnable) throws SQLException {
-        executeTransaction((DatabaseConnection db) -> {
+	@SuppressWarnings("overloads")
+	protected void executeTransaction(DatabaseRunnable runnable) throws SQLException {
+		Database database = transactionDatabase.get();
+		if(database!=null) {
+			// Reuse current database
+			database.executeTransaction(runnable);
+		} else {
+			// Get database
+			database=getDatabase();
+			transactionDatabase.set(database);
+			try {
+				database.executeTransaction(runnable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	@Override
+	public void executeTransaction(final Runnable runnable) throws SQLException {
+		executeTransaction((DatabaseConnection db) -> {
 			runnable.run();
 		});
-    }
+	}
 }
