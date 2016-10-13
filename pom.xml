@@ -59,8 +59,8 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 							<configuration>
 								<links>
 									<link>https://www.aoindustries.com/ao-dao/api/apidocs/</link>
-									<link>https://www.aoindustries.com/docs/ao-dbc/</link>
-									<link>https://www.aoindustries.com/docs/aocode-public/</link>
+									<link>https://www.aoindustries.com/ao-dbc/apidocs/</link>
+									<link>https://www.aoindustries.com/aocode-public/apidocs/</link>
 								</links>
 							</configuration>
 						</plugin>
