@@ -27,7 +27,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<parent>
 		<groupId>com.aoindustries</groupId>
 		<artifactId>ao-dao</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.aoindustries</groupId>
@@ -74,22 +74,22 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-dao-api</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-dao-base</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-dbc</artifactId>
-			<version>1.1.0</version>
+			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>aocode-public</artifactId>
-			<version>1.8.0</version>
+			<version>1.8.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
