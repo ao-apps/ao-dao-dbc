@@ -38,8 +38,6 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<bookPath>/${project.parent.artifactId}/dbc</bookPath>
 		<shortTitle>DBC</shortTitle>
-		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="${project.parent.url}">${project.parent.name}</a>
-/ <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
 		<description.html><![CDATA[Simple data access objects framework implementation leveraging <a target="_top" href="https://www.aoindustries.com/ao-dbc/">AO Database Connectivity</a>.]]></description.html>
 	</properties>
 
