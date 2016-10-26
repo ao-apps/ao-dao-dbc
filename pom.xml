@@ -42,7 +42,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	</properties>
 
 	<name>AO DAO DBC</name>
-	<url>${project.parent.url}dbc/</url>
+	<url>https://www.aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
 	<description>Simple data access objects framework implementation leveraging ao-dbc.</description>
 	<inceptionYear>2011</inceptionYear>
 
