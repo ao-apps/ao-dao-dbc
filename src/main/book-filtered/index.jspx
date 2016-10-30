@@ -38,7 +38,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		<core:child page="changelog.jspx" />
 		<core:child page="apidocs/index.jspx" />
 		<p>
-			Simple data access objects framework implementation leveraging <core:link page="/ao-dbc/index.jspx" />.
+			Simple data access objects framework implementation leveraging <core:link book="/ao-dbc" page="/index.jspx" />.
 		</p>
 		<section:section label="Project Links">
 			<ul>
