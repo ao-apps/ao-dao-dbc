@@ -38,11 +38,11 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<bookPath>/${project.parent.artifactId}/dbc</bookPath>
 		<shortTitle>DBC</shortTitle>
-		<description.html><![CDATA[Simple data access objects framework implementation leveraging <a target="_top" href="https://www.aoindustries.com/ao-dbc/">AO Database Connectivity</a>.]]></description.html>
+		<description.html><![CDATA[Simple data access objects framework implementation leveraging <a target="_top" href="https://aoindustries.com/ao-dbc/">AO Database Connectivity</a>.]]></description.html>
 	</properties>
 
 	<name>AO DAO DBC</name>
-	<url>https://www.aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
 	<description>Simple data access objects framework implementation leveraging ao-dbc.</description>
 	<inceptionYear>2011</inceptionYear>
 
@@ -65,9 +65,9 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 							<artifactId>maven-javadoc-plugin</artifactId>
 							<configuration>
 								<links>
-									<link>https://www.aoindustries.com/ao-dao/api/apidocs/</link>
-									<link>https://www.aoindustries.com/ao-dbc/apidocs/</link>
-									<link>https://www.aoindustries.com/aocode-public/apidocs/</link>
+									<link>https://aoindustries.com/ao-dao/api/apidocs/</link>
+									<link>https://aoindustries.com/ao-dbc/apidocs/</link>
+									<link>https://aoindustries.com/aocode-public/apidocs/</link>
 								</links>
 							</configuration>
 						</plugin>
