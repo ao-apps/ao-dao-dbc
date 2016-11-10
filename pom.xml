@@ -36,13 +36,12 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>jar</packaging>
 
 	<properties>
-		<bookPath>/${project.parent.artifactId}/dbc</bookPath>
 		<shortTitle>DBC</shortTitle>
 		<description.html><![CDATA[Simple data access objects framework implementation leveraging <a target="_top" href="https://aoindustries.com/ao-dbc/">AO Database Connectivity</a>.]]></description.html>
 	</properties>
 
 	<name>AO DAO DBC</name>
-	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://aoindustries.com/${project.parent.artifactId}/dbc/</url>
 	<description>Simple data access objects framework implementation leveraging ao-dbc.</description>
 	<inceptionYear>2011</inceptionYear>
 
