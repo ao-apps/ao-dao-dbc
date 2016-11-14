@@ -26,8 +26,9 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 
 	<parent>
 		<groupId>com.aoindustries</groupId>
-		<artifactId>ao-dao</artifactId>
-		<version>1.0.2-SNAPSHOT</version>
+		<artifactId>ao-oss-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
 	<groupId>com.aoindustries</groupId>
@@ -36,12 +37,18 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>jar</packaging>
 
 	<properties>
+		<javaVersion>1.8</javaVersion>
+		<compiler.bootclasspath>${bootclasspath.jdk18}</compiler.bootclasspath>
+		<javac.bootclasspath>${bootclasspath.jdk18}</javac.bootclasspath>
+		<javac.link.javaApi>${javac.link.javaApi.jdk18}</javac.link.javaApi>
+		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="https://aoindustries.com/ao-dao/">AO DAO</a>
+/ <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
 		<shortTitle>DBC</shortTitle>
 		<description.html><![CDATA[Simple data access objects framework implementation leveraging <a target="_top" href="https://aoindustries.com/ao-dbc/">AO Database Connectivity</a>.]]></description.html>
 	</properties>
 
 	<name>AO DAO DBC</name>
-	<url>https://aoindustries.com/${project.parent.artifactId}/dbc/</url>
+	<url>https://aoindustries.com/ao-dao/dbc/</url>
 	<description>Simple data access objects framework implementation leveraging ao-dbc.</description>
 	<inceptionYear>2011</inceptionYear>
 
