@@ -46,7 +46,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			arg.license="${currentPage.property.license}"
 		/>
 		<core:child page="changelog.jspx" />
-		<core:child page="apidocs/" />
+		<core:child page="apidocs/index.jspx" />
 		<p>
 			Simple data access objects framework implementation leveraging <core:link book="/ao-dbc" page="/index.jspx" />.
 		</p>
