@@ -86,7 +86,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-dao-api</artifactId><version>1.0.4-validation-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-dao-base</artifactId><version>1.0.4-SNAPSHOT</version>
+				<groupId>com.aoindustries</groupId><artifactId>ao-dao-base</artifactId><version>1.0.4-validation-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-dbc</artifactId><version>1.2.1-validation-SNAPSHOT</version>
