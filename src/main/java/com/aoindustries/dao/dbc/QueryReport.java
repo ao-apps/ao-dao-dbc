@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -67,7 +67,7 @@ public abstract class QueryReport
 		/**
 		 * Gets the label from the report.
 		 *
-		 * @see Report#getColumnLabel
+		 * @see QueryReport#getColumnLabel(com.aoindustries.dao.dbc.QueryReport.QueryColumn)
 		 */
 		@Override
 		public String getLabel() {
