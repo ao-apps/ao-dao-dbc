@@ -35,8 +35,6 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<!-- These values are copied from the project being documented -->
 		<documented.artifactId>ao-dao-dbc</documented.artifactId>
-		<documented.javaVersion>1.8</documented.javaVersion>
-		<documented.javac.link.javaApi>${javac.link.javaApi.jdk8}</documented.javac.link.javaApi>
 		<documented.name>AO DAO DBC</documented.name>
 		<documented.shortTitle>DBC</documented.shortTitle>
 		<documented.description>Simple data access objects framework implementation leveraging ao-dbc.</documented.description>
