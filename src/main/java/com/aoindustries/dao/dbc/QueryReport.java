@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,11 +22,11 @@
  */
 package com.aoindustries.dao.dbc;
 
+import com.aoindustries.collections.AoCollections;
 import com.aoindustries.dao.Report;
 import com.aoindustries.dbc.Database;
 import com.aoindustries.dbc.DatabaseConnection;
 import com.aoindustries.sql.WrappedSQLException;
-import com.aoindustries.util.AoCollections;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

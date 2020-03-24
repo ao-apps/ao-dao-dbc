@@ -63,6 +63,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 							<links>
 								<link>${javadoc.link.javase}</link>
 								<!-- Direct -->
+								<link>https://aoindustries.com/ao-collections/apidocs/</link>
 								<link>https://aoindustries.com/ao-dao/api/apidocs/</link>
 								<link>https://aoindustries.com/ao-dao/base/apidocs/</link>
 								<link>https://aoindustries.com/ao-dbc/apidocs/</link>
@@ -78,6 +79,9 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<dependencyManagement>
 		<dependencies>
 			<!-- Direct -->
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-collections</artifactId><version>1.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-dao-api</artifactId><version>1.0.6-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
@@ -95,6 +99,9 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 
 	<dependencies>
 		<!-- Direct -->
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-collections</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-dao-api</artifactId>
 		</dependency>
