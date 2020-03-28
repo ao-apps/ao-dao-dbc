@@ -29,7 +29,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		<relativePath>../../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>ao-dao-dbc</artifactId><version>1.0.6-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>ao-dao-dbc</artifactId><version>1.0.6</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -49,7 +49,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		<connection>scm:git:git://github.com/aoindustries/ao-dao-dbc.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-dao-dbc.git</developerConnection>
 		<url>https://github.com/aoindustries/ao-dao-dbc</url>
-		<tag>HEAD</tag>
+		<tag>ao-dao-dbc-1.0.6</tag>
 	</scm>
 
 	<issueManagement>
