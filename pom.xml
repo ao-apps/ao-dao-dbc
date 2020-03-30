@@ -45,7 +45,6 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 	<inceptionYear>2011</inceptionYear>
 
 	<scm>
-		<!-- Can't inherit due to multi-module -->
 		<connection>scm:git:git://github.com/aoindustries/ao-dao-dbc.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-dao-dbc.git</developerConnection>
 		<url>https://github.com/aoindustries/ao-dao-dbc</url>
