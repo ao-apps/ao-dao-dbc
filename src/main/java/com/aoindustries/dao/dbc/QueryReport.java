@@ -85,17 +85,19 @@ public abstract class QueryReport
 		private final List<QueryColumn> columns;
 		private final List<List<Object>> tableData;
 
-		ReportResult(List<QueryColumn> columns, List<List<Object>> tableData) {
+		private ReportResult(List<QueryColumn> columns, List<List<Object>> tableData) {
 			this.columns = columns;
 			this.tableData = tableData;
 		}
 
 		@Override
+		@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 		public List<QueryColumn> getColumns() {
 			return columns;
 		}
 
 		@Override
+		@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 		public List<List<Object>> getTableData() {
 			return tableData;
 		}
@@ -230,7 +232,9 @@ public abstract class QueryReport
 									if(value instanceof Array) {
 										List<Object> values = new ArrayList<>();
 										try (ResultSet arrayResults = ((Array)value).getResultSet()) {
-											while(arrayResults.next()) values.add(arrayResults.getObject(2));
+											while(arrayResults.next()) {
+												values.add(arrayResults.getObject(2));
+											}
 										}
 										value = AoCollections.optimalUnmodifiableList(values);
 									}
@@ -261,6 +265,7 @@ public abstract class QueryReport
 	 *
 	 * This default implementation does nothing.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	public void beforeQuery(Map<String,? extends Object> parameterValues, Connection conn) throws SQLException {
 		// Do nothing
 	}
@@ -271,6 +276,7 @@ public abstract class QueryReport
 	 *
 	 * This default implementation does nothing.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	public void afterQuery(Map<String,? extends Object> parameterValues, Connection conn) throws SQLException {
 		// Do nothing
 	}
