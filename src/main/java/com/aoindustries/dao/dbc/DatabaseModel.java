@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,9 +25,11 @@ package com.aoindustries.dao.dbc;
 import com.aoindustries.dao.impl.AbstractModel;
 import com.aoindustries.dbc.Database;
 import com.aoindustries.dbc.DatabaseCallable;
-import com.aoindustries.dbc.DatabaseConnection;
+import com.aoindustries.dbc.DatabaseCallableE;
 import com.aoindustries.dbc.DatabaseRunnable;
+import com.aoindustries.dbc.DatabaseRunnableE;
 import java.sql.SQLException;
+import java.util.concurrent.Callable;
 
 /**
  * A base implementation of <code>DaoDatabase</code>.
@@ -38,31 +40,32 @@ abstract public class DatabaseModel
 
 	/**
 	 * Gets the underlying database that should be used at this moment in time.
-	 * It is possible that the database will change in an fail-over state.
+	 * It is possible that the database will change in a fail-over state.
 	 * Within a single transaction, however, the database returned must be the
 	 * same.
 	 */
-	abstract protected Database getDatabase() throws SQLException;
+	abstract public Database getDatabase() throws SQLException;
 
 	/**
-	 * Uses a ThreadLocal to make sure an entire transaction is executed against the same
+	 * Uses a {@link ThreadLocal} to make sure an entire transaction is executed against the same
 	 * underlying database.  This way, nothing funny will happen if master/slave databases
 	 * are switched mid-transaction.
 	 */
 	protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
+	@Override
 	@SuppressWarnings("overloads")
-	protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
+	public void transaction(Runnable runnable) throws SQLException {
 		Database database = transactionDatabase.get();
-		if(database!=null) {
+		if(database != null) {
 			// Reuse current database
-			return database.executeTransaction(callable);
+			database.transaction(runnable);
 		} else {
 			// Get database
-			database=getDatabase();
-			transactionDatabase.set(database);
+			database = getDatabase();
 			try {
-				return database.executeTransaction(callable);
+				transactionDatabase.set(database);
+				database.transaction(runnable);
 			} finally {
 				transactionDatabase.remove();
 			}
@@ -70,17 +73,35 @@ abstract public class DatabaseModel
 	}
 
 	@SuppressWarnings("overloads")
-	protected void executeTransaction(DatabaseRunnable runnable) throws SQLException {
+	public void transaction(DatabaseRunnable runnable) throws SQLException {
 		Database database = transactionDatabase.get();
-		if(database!=null) {
+		if(database != null) {
 			// Reuse current database
-			database.executeTransaction(runnable);
+			database.transaction(runnable);
 		} else {
 			// Get database
-			database=getDatabase();
-			transactionDatabase.set(database);
+			database = getDatabase();
 			try {
-				database.executeTransaction(runnable);
+				transactionDatabase.set(database);
+				database.transaction(runnable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	@SuppressWarnings("overloads")
+	public <E extends Exception> void transaction(Class<E> eClass, DatabaseRunnableE<E> runnable) throws SQLException, E {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			database.transaction(eClass, runnable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				database.transaction(eClass, runnable);
 			} finally {
 				transactionDatabase.remove();
 			}
@@ -88,9 +109,57 @@ abstract public class DatabaseModel
 	}
 
 	@Override
-	public void executeTransaction(final Runnable runnable) throws SQLException {
-		executeTransaction((DatabaseConnection db) -> {
-			runnable.run();
-		});
+	@SuppressWarnings("overloads")
+	public <V> V transaction(Callable<V> callable) throws SQLException {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			return database.transaction(callable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				return database.transaction(callable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	@SuppressWarnings("overloads")
+	public <V> V transaction(DatabaseCallable<V> callable) throws SQLException {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			return database.transaction(callable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				return database.transaction(callable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	@SuppressWarnings("overloads")
+	public <V,E extends Exception> V transaction(Class<E> eClass, DatabaseCallableE<V,E> callable) throws SQLException, E {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			return database.transaction(eClass, callable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				return database.transaction(eClass, callable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
 	}
 }
