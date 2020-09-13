@@ -173,8 +173,7 @@ public abstract class QueryReport
 
 	@Override
 	public ReportResult executeReport(Map<String,? extends Object> parameterValues) throws SQLException {
-		Connection conn = database.getConnection(Connection.TRANSACTION_READ_COMMITTED, isReadOnly(), 1);
-		try {
+		try (Connection conn = database.getConnection(isReadOnly())) {
 			try {
 				beforeQuery(parameterValues, conn);
 				try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -254,16 +253,17 @@ public abstract class QueryReport
 			} finally {
 				afterQuery(parameterValues, conn);
 			}
-		} finally {
-			database.releaseConnection(conn);
 		}
 	}
 
 	/**
 	 * Called before the query is executed, this may setup any temp tables or views that are required
 	 * by the main query.
-	 *
+	 * <p>
 	 * This default implementation does nothing.
+	 * </p>
+	 *
+	 * @see  #afterQuery(java.util.Map, java.sql.Connection)
 	 */
 	@SuppressWarnings("NoopMethodInAbstractClass")
 	public void beforeQuery(Map<String,? extends Object> parameterValues, Connection conn) throws SQLException {
@@ -272,9 +272,13 @@ public abstract class QueryReport
 
 	/**
 	 * Called in try/finally after the query is executed, this may release any temp tables or views that were setup
-	 * by beforeQuery.  This will be called even when the beforeQuery does not complete fully.
-	 *
+	 * by {@link #beforeQuery(java.util.Map, java.sql.Connection)}.  This will be called even when the beforeQuery does
+	 * not complete fully, and the conn may already be closed or otherwise in an invalid state.
+	 * <p>
 	 * This default implementation does nothing.
+	 * </p>
+	 *
+	 * @see  #beforeQuery(java.util.Map, java.sql.Connection)
 	 */
 	@SuppressWarnings("NoopMethodInAbstractClass")
 	public void afterQuery(Map<String,? extends Object> parameterValues, Connection conn) throws SQLException {
