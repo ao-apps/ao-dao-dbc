@@ -28,8 +28,9 @@ import com.aoindustries.dbc.DatabaseCallable;
 import com.aoindustries.dbc.DatabaseCallableE;
 import com.aoindustries.dbc.DatabaseRunnable;
 import com.aoindustries.dbc.DatabaseRunnableE;
+import com.aoindustries.lang.RunnableE;
+import com.aoindustries.util.concurrent.CallableE;
 import java.sql.SQLException;
-import java.util.concurrent.Callable;
 
 /**
  * A base implementation of <code>DaoDatabase</code>.
@@ -53,110 +54,182 @@ abstract public class DatabaseModel
 	 */
 	protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
+	/**
+	 * @see  Database#call(com.aoindustries.util.concurrent.CallableE)
+	 */
 	@Override
-	@SuppressWarnings("overloads")
-	public void transaction(Runnable runnable) throws SQLException {
+	public <V> V call(CallableE<? extends V,? extends RuntimeException> callable) throws SQLException {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
-			database.transaction(runnable);
+			return database.call(callable);
 		} else {
 			// Get database
 			database = getDatabase();
 			try {
 				transactionDatabase.set(database);
-				database.transaction(runnable);
+				return database.call(callable);
 			} finally {
 				transactionDatabase.remove();
 			}
 		}
 	}
 
-	@SuppressWarnings("overloads")
-	public void transaction(DatabaseRunnable runnable) throws SQLException {
-		Database database = transactionDatabase.get();
-		if(database != null) {
-			// Reuse current database
-			database.transaction(runnable);
-		} else {
-			// Get database
-			database = getDatabase();
-			try {
-				transactionDatabase.set(database);
-				database.transaction(runnable);
-			} finally {
-				transactionDatabase.remove();
-			}
-		}
-	}
-
-	@SuppressWarnings("overloads")
-	public <E extends Exception> void transaction(Class<E> eClass, DatabaseRunnableE<E> runnable) throws SQLException, E {
-		Database database = transactionDatabase.get();
-		if(database != null) {
-			// Reuse current database
-			database.transaction(eClass, runnable);
-		} else {
-			// Get database
-			database = getDatabase();
-			try {
-				transactionDatabase.set(database);
-				database.transaction(eClass, runnable);
-			} finally {
-				transactionDatabase.remove();
-			}
-		}
-	}
-
+	/**
+	 * @see  Database#call(java.lang.Class, com.aoindustries.util.concurrent.CallableE)
+	 */
 	@Override
-	@SuppressWarnings("overloads")
-	public <V> V transaction(Callable<V> callable) throws SQLException {
+	public <V,E extends Throwable> V call(Class<? extends E> eClass, CallableE<? extends V,? extends E> callable) throws SQLException, E {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
-			return database.transaction(callable);
+			return database.call(eClass, callable);
 		} else {
 			// Get database
 			database = getDatabase();
 			try {
 				transactionDatabase.set(database);
-				return database.transaction(callable);
+				return database.call(eClass, callable);
 			} finally {
 				transactionDatabase.remove();
 			}
 		}
 	}
 
-	@SuppressWarnings("overloads")
-	public <V> V transaction(DatabaseCallable<V> callable) throws SQLException {
+	/**
+	 * @see  Database#call(com.aoindustries.dbc.DatabaseCallable)
+	 */
+	public <V> V call(DatabaseCallable<? extends V> callable) throws SQLException {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
-			return database.transaction(callable);
+			return database.call(callable);
 		} else {
 			// Get database
 			database = getDatabase();
 			try {
 				transactionDatabase.set(database);
-				return database.transaction(callable);
+				return database.call(callable);
 			} finally {
 				transactionDatabase.remove();
 			}
 		}
 	}
 
+	/**
+	 * @deprecated  Please use {@link #call(com.aoindustries.dbc.DatabaseCallable)}
+	 */
+	@Deprecated
 	@SuppressWarnings("overloads")
-	public <V,E extends Exception> V transaction(Class<E> eClass, DatabaseCallableE<V,E> callable) throws SQLException, E {
+	protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
+		return call(callable);
+	}
+
+	/**
+	 * @see  Database#call(java.lang.Class, com.aoindustries.dbc.DatabaseCallableE)
+	 */
+	public <V,E extends Exception> V call(Class<? extends E> eClass, DatabaseCallableE<? extends V,? extends E> callable) throws SQLException, E {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
-			return database.transaction(eClass, callable);
+			return database.call(eClass, callable);
 		} else {
 			// Get database
 			database = getDatabase();
 			try {
 				transactionDatabase.set(database);
-				return database.transaction(eClass, callable);
+				return database.call(eClass, callable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	/**
+	 * @see  Database#run(java.lang.Runnable)
+	 */
+	@Override
+	public void run(Runnable runnable) throws SQLException {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			database.run(runnable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				database.run(runnable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	/**
+	 * @see  Database#run(java.lang.Class, com.aoindustries.lang.RunnableE)
+	 */
+	@Override
+	public <E extends Throwable> void run(Class<? extends E> eClass, RunnableE<? extends E> runnable) throws SQLException, E {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			database.run(eClass, runnable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				database.run(eClass, runnable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	/**
+	 * @see  Database#run(com.aoindustries.dbc.DatabaseRunnable)
+	 */
+	public void run(DatabaseRunnable runnable) throws SQLException {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			database.run(runnable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				database.run(runnable);
+			} finally {
+				transactionDatabase.remove();
+			}
+		}
+	}
+
+	/**
+	 * @deprecated  Please use {@link #run(com.aoindustries.dbc.DatabaseRunnable)}
+	 */
+	@Deprecated
+	@SuppressWarnings("overloads")
+	protected void executeTransaction(DatabaseRunnable runnable) throws SQLException {
+		run(runnable);
+	}
+
+	/**
+	 * @see  Database#run(java.lang.Class, com.aoindustries.dbc.DatabaseRunnableE)
+	 */
+	public <E extends Exception> void run(Class<? extends E> eClass, DatabaseRunnableE<? extends E> runnable) throws SQLException, E {
+		Database database = transactionDatabase.get();
+		if(database != null) {
+			// Reuse current database
+			database.run(eClass, runnable);
+		} else {
+			// Get database
+			database = getDatabase();
+			try {
+				transactionDatabase.set(database);
+				database.run(eClass, runnable);
 			} finally {
 				transactionDatabase.remove();
 			}
