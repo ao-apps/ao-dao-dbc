@@ -58,7 +58,7 @@ abstract public class DatabaseModel
 	 * @see  Database#call(com.aoindustries.util.concurrent.CallableE)
 	 */
 	@Override
-	public <V> V call(CallableE<? extends V,? extends RuntimeException> callable) throws SQLException {
+	public <V> V call(CallableE<? extends V,? extends SQLException> callable) throws SQLException {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
@@ -146,10 +146,10 @@ abstract public class DatabaseModel
 	}
 
 	/**
-	 * @see  Database#run(java.lang.Runnable)
+	 * @see  Database#run(com.aoindustries.lang.RunnableE)
 	 */
 	@Override
-	public void run(Runnable runnable) throws SQLException {
+	public void run(RunnableE<? extends SQLException> runnable) throws SQLException {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
