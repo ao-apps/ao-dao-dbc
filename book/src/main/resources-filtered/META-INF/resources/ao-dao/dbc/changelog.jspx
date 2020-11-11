@@ -37,7 +37,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:27:20-0500"
-		dateModified="2020-09-19T03:40:18-05:00"
+		dateModified="2020-11-11T12:48:54-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-dao-dbc:pom.version}" />
@@ -55,12 +55,12 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			>
 				<ul>
 					<li>
-						Renamed <code>DatabaseModel.executeTransaction(…)</code> to <code>DatabaseModel.call(…)</code>
-						and <code>DatabaseModel.run(…)</code>.
+						Renamed <code>DatabaseModel.executeTransaction(…)</code> to <code>DatabaseModel.transactionCall(…)</code>
+						and <code>DatabaseModel.transactionRun(…)</code>.
 					</li>
 					<li>
-						Added variants of <code>DatabaseModel.call(…)</code> and <code>DatabaseModel.run(…)</code> to
-						match the full set of transaction methods of the underlying <code>Database</code>.
+						Added variants of <code>DatabaseModel.transactionCall(…)</code> and <code>DatabaseModel.transactionRun(…)</code>
+						to match the full set of transaction methods of the underlying <code>Database</code>.
 					</li>
 					<li>
 						<p>
@@ -70,8 +70,8 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 						</p>
 						<ol>
 							<li><code>getDatabase()</code></li>
-							<li><code>call(…)</code></li>
-							<li><code>run(…)</code></li>
+							<li><code>transactionCall(…)</code></li>
+							<li><code>transactionRun(…)</code></li>
 						</ol>
 					</li>
 				</ul>
