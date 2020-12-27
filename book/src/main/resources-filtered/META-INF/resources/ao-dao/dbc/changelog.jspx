@@ -37,7 +37,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:27:20-0500"
-		dateModified="2020-11-29T23:21:33-06:00"
+		dateModified="2020-12-26T23:15:01-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -46,7 +46,16 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						Removed all uses of <ao:a href="https://aoindustries.com/ao-sql/apidocs/com/aoindustries/sql/WrappedSQLException.html">WrappedSQLException</ao:a>.
+						Now registers SQL statements directly with <code><ao:a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</ao:a></code>
+						instead.  This allows the SQL statements to be logged while not altering exception types underneath
+						the application.
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release

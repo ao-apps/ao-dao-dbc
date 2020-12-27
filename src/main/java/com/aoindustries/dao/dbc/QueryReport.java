@@ -26,7 +26,7 @@ import com.aoindustries.collections.AoCollections;
 import com.aoindustries.dao.Report;
 import com.aoindustries.dbc.Database;
 import com.aoindustries.dbc.DatabaseConnection;
-import com.aoindustries.sql.WrappedSQLException;
+import com.aoindustries.util.ErrorPrinter;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -246,8 +246,9 @@ public abstract class QueryReport
 								Collections.unmodifiableList(tableData)
 							);
 						}
-					} catch(SQLException e) {
-						throw new WrappedSQLException(e, pstmt);
+					} catch(Error | RuntimeException | SQLException e) {
+						ErrorPrinter.addSQL(e, pstmt);
+						throw e;
 					}
 				}
 			} finally {

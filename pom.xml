@@ -117,11 +117,6 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</outputDirectory>
 										</artifactItem>
-										<artifactItem>
-											<groupId>com.aoindustries</groupId><artifactId>ao-sql</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
-											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-sql</outputDirectory>
-										</artifactItem>
 									</artifactItems>
 								</configuration>
 							</execution>
@@ -152,10 +147,6 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 									<url>https://aoindustries.com/ao-lang/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</location>
 								</offlineLink>
-								<offlineLink>
-									<url>https://aoindustries.com/ao-sql/apidocs/</url>
-									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-sql</location>
-								</offlineLink>
 								<!-- Java SE -->
 								<offlineLink>
 									<url>${javadoc.link.javase}</url>
@@ -182,13 +173,10 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-dao-base</artifactId><version>2.0.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-dbc</artifactId><version>2.1.0${POST-SNAPSHOT}</version>
+				<groupId>com.aoindustries</groupId><artifactId>ao-dbc</artifactId><version>2.1.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.11.1${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-sql</artifactId><version>1.0.1${POST-SNAPSHOT}</version>
+				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.12.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<!-- Transitive -->
 			<dependency>
@@ -199,6 +187,9 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>3.2.1${POST-SNAPSHOT}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-sql</artifactId><version>1.0.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-sql-failfast</artifactId><version>1.0.1${POST-SNAPSHOT}</version>
@@ -240,9 +231,6 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-sql</artifactId>
 		</dependency>
 	</dependencies>
 </project>
