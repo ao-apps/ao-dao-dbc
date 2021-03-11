@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -172,7 +172,7 @@ public abstract class QueryReport
 	}
 
 	@Override
-	public ReportResult executeReport(Map<String,? extends Object> parameterValues) throws SQLException {
+	public ReportResult executeReport(Map<String, ? extends Object> parameterValues) throws SQLException {
 		try (Connection conn = database.getConnection(isReadOnly())) {
 			try {
 				beforeQuery(parameterValues, conn);
@@ -267,7 +267,7 @@ public abstract class QueryReport
 	 * @see  #afterQuery(java.util.Map, java.sql.Connection)
 	 */
 	@SuppressWarnings("NoopMethodInAbstractClass")
-	public void beforeQuery(Map<String,? extends Object> parameterValues, Connection conn) throws SQLException {
+	public void beforeQuery(Map<String, ? extends Object> parameterValues, Connection conn) throws SQLException {
 		// Do nothing
 	}
 
@@ -282,7 +282,7 @@ public abstract class QueryReport
 	 * @see  #beforeQuery(java.util.Map, java.sql.Connection)
 	 */
 	@SuppressWarnings("NoopMethodInAbstractClass")
-	public void afterQuery(Map<String,? extends Object> parameterValues, Connection conn) throws SQLException {
+	public void afterQuery(Map<String, ? extends Object> parameterValues, Connection conn) throws SQLException {
 		// Do nothing
 	}
 }

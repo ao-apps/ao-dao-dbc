@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2011, 2013, 2015, 2016, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -58,7 +58,7 @@ abstract public class DatabaseModel
 	 * @see  Database#transactionCall(com.aoindustries.util.concurrent.CallableE)
 	 */
 	@Override
-	public <V> V transactionCall(CallableE<? extends V,? extends SQLException> callable) throws SQLException {
+	public <V> V transactionCall(CallableE<? extends V, ? extends SQLException> callable) throws SQLException {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
@@ -76,10 +76,12 @@ abstract public class DatabaseModel
 	}
 
 	/**
+	 * @param  <Ex>  An arbitrary exception type that may be thrown
+	 *
 	 * @see  Database#transactionCall(java.lang.Class, com.aoindustries.util.concurrent.CallableE)
 	 */
 	@Override
-	public <V,E extends Throwable> V transactionCall(Class<? extends E> eClass, CallableE<? extends V,? extends E> callable) throws SQLException, E {
+	public <V, Ex extends Throwable> V transactionCall(Class<? extends Ex> eClass, CallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
@@ -126,9 +128,12 @@ abstract public class DatabaseModel
 	}
 
 	/**
+	 * @param  <Ex>  An arbitrary exception type that may be thrown
+	 *
 	 * @see  Database#transactionCall(java.lang.Class, com.aoindustries.dbc.DatabaseCallableE)
 	 */
-	public <V,E extends Exception> V transactionCall(Class<? extends E> eClass, DatabaseCallableE<? extends V,? extends E> callable) throws SQLException, E {
+	// TODO: Ex extends Throwable
+	public <V, Ex extends Exception> V transactionCall(Class<? extends Ex> eClass, DatabaseCallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
@@ -167,10 +172,12 @@ abstract public class DatabaseModel
 	}
 
 	/**
+	 * @param  <Ex>  An arbitrary exception type that may be thrown
+	 *
 	 * @see  Database#transactionRun(java.lang.Class, com.aoindustries.lang.RunnableE)
 	 */
 	@Override
-	public <E extends Throwable> void transactionRun(Class<? extends E> eClass, RunnableE<? extends E> runnable) throws SQLException, E {
+	public <Ex extends Throwable> void transactionRun(Class<? extends Ex> eClass, RunnableE<? extends Ex> runnable) throws SQLException, Ex {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
@@ -217,9 +224,12 @@ abstract public class DatabaseModel
 	}
 
 	/**
+	 * @param  <Ex>  An arbitrary exception type that may be thrown
+	 *
 	 * @see  Database#transactionRun(java.lang.Class, com.aoindustries.dbc.DatabaseRunnableE)
 	 */
-	public <E extends Exception> void transactionRun(Class<? extends E> eClass, DatabaseRunnableE<? extends E> runnable) throws SQLException, E {
+	// TODO: Ex extends Throwable
+	public <Ex extends Exception> void transactionRun(Class<? extends Ex> eClass, DatabaseRunnableE<? extends Ex> runnable) throws SQLException, Ex {
 		Database database = transactionDatabase.get();
 		if(database != null) {
 			// Reuse current database
