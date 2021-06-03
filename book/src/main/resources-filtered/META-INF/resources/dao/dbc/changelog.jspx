@@ -22,7 +22,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 -->
 <jsp:root
-	xmlns:ao="https://aoindustries.com/ao-taglib/"
+	xmlns:ao="https://oss.aoapps.com/taglib/"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:changelog="https://semanticcms.com/changelog/taglib/"
 	xmlns:core="https://semanticcms.com/core/taglib/"
@@ -37,7 +37,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:27:20-05:00"
-		dateModified="2021-05-26T06:36:49-05:00"
+		dateModified="2021-05-31T01:04:26-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -45,16 +45,18 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 				version="@{project.version}"
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
+				repository="https://s01.oss.sonatype.org/content/repositories/snapshots/"
 				scmUrl="@{project.scm.url}"
 			>
 				<ul>
 					<li>
-						Removed all uses of <ao:a href="https://aoindustries.com/ao-sql/apidocs/com/aoindustries/sql/WrappedSQLException.html">WrappedSQLException</ao:a>.
-						Now registers SQL statements directly with <code><ao:a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</ao:a></code>
+						Removed all uses of <ao:a href="https://oss.aoapps.com/sql/apidocs/com/aoindustries/sql/WrappedSQLException.html">WrappedSQLException</ao:a>.
+						Now registers SQL statements directly with <code><ao:a href="https://oss.aoapps.com/lang/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</ao:a></code>
 						instead.  This allows the SQL statements to be logged while not altering exception types underneath
 						the application.
 					</li>
 					<li>Minimum Java version changed from 1.8 to 11.</li>
+					<li>Maven artifact relocated from <code>com.aoindustries:ao-dao-dbc</code> to <code>com.aoapps:ao-dao-dbc</code>.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
@@ -63,7 +65,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="2.0.0"
 			datePublished="2020-11-29T23:21:33-06:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -95,7 +97,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.6"
 			datePublished="2020-03-28T18:06:08-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -111,7 +113,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.4"
 			datePublished="2019-06-21T02:55:43-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -129,7 +131,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.3"
 			datePublished="2017-07-20T02:20:06-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -142,12 +144,12 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.2"
 			datePublished="2016-11-16T00:00:40-06:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
 			<ul>
-				<li>New <core:link book="/ao-oss-parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
+				<li>New <core:link book="/parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
 				<li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
 				<li>Added changelog as top-level project link.</li>
 			</ul>
@@ -157,7 +159,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.1"
 			datePublished="2016-10-20T18:25:00-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -171,7 +173,7 @@ along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.0"
 			datePublished="2016-10-09T16:27:00-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
