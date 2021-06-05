@@ -20,16 +20,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.dbc;
+package com.aoapps.dao.dbc;
 
-import com.aoindustries.dao.impl.AbstractModel;
-import com.aoindustries.dbc.Database;
-import com.aoindustries.dbc.DatabaseCallable;
-import com.aoindustries.dbc.DatabaseCallableE;
-import com.aoindustries.dbc.DatabaseRunnable;
-import com.aoindustries.dbc.DatabaseRunnableE;
-import com.aoindustries.lang.RunnableE;
-import com.aoindustries.util.concurrent.CallableE;
+import com.aoapps.dao.base.AbstractModel;
+import com.aoapps.dbc.Database;
+import com.aoapps.dbc.DatabaseCallable;
+import com.aoapps.dbc.DatabaseCallableE;
+import com.aoapps.dbc.DatabaseRunnable;
+import com.aoapps.dbc.DatabaseRunnableE;
+import com.aoapps.lang.RunnableE;
+import com.aoapps.lang.concurrent.CallableE;
 import java.sql.SQLException;
 
 /**
@@ -55,7 +55,7 @@ abstract public class DatabaseModel
 	protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
 	/**
-	 * @see  Database#transactionCall(com.aoindustries.util.concurrent.CallableE)
+	 * @see  Database#transactionCall(com.aoapps.lang.concurrent.CallableE)
 	 */
 	@Override
 	public <V> V transactionCall(CallableE<? extends V, ? extends SQLException> callable) throws SQLException {
@@ -78,7 +78,7 @@ abstract public class DatabaseModel
 	/**
 	 * @param  <Ex>  An arbitrary exception type that may be thrown
 	 *
-	 * @see  Database#transactionCall(java.lang.Class, com.aoindustries.util.concurrent.CallableE)
+	 * @see  Database#transactionCall(java.lang.Class, com.aoapps.lang.concurrent.CallableE)
 	 */
 	@Override
 	public <V, Ex extends Throwable> V transactionCall(Class<? extends Ex> eClass, CallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
@@ -99,7 +99,7 @@ abstract public class DatabaseModel
 	}
 
 	/**
-	 * @see  Database#transactionCall(com.aoindustries.dbc.DatabaseCallable)
+	 * @see  Database#transactionCall(com.aoapps.dbc.DatabaseCallable)
 	 */
 	public <V> V transactionCall(DatabaseCallable<? extends V> callable) throws SQLException {
 		Database database = transactionDatabase.get();
@@ -119,7 +119,7 @@ abstract public class DatabaseModel
 	}
 
 	/**
-	 * @deprecated  Please use {@link #transactionCall(com.aoindustries.dbc.DatabaseCallable)}
+	 * @deprecated  Please use {@link #transactionCall(com.aoapps.dbc.DatabaseCallable)}
 	 */
 	@Deprecated
 	@SuppressWarnings("overloads")
@@ -130,7 +130,7 @@ abstract public class DatabaseModel
 	/**
 	 * @param  <Ex>  An arbitrary exception type that may be thrown
 	 *
-	 * @see  Database#transactionCall(java.lang.Class, com.aoindustries.dbc.DatabaseCallableE)
+	 * @see  Database#transactionCall(java.lang.Class, com.aoapps.dbc.DatabaseCallableE)
 	 */
 	// TODO: Ex extends Throwable
 	public <V, Ex extends Exception> V transactionCall(Class<? extends Ex> eClass, DatabaseCallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
@@ -151,7 +151,7 @@ abstract public class DatabaseModel
 	}
 
 	/**
-	 * @see  Database#transactionRun(com.aoindustries.lang.RunnableE)
+	 * @see  Database#transactionRun(com.aoapps.lang.RunnableE)
 	 */
 	@Override
 	public void transactionRun(RunnableE<? extends SQLException> runnable) throws SQLException {
@@ -174,7 +174,7 @@ abstract public class DatabaseModel
 	/**
 	 * @param  <Ex>  An arbitrary exception type that may be thrown
 	 *
-	 * @see  Database#transactionRun(java.lang.Class, com.aoindustries.lang.RunnableE)
+	 * @see  Database#transactionRun(java.lang.Class, com.aoapps.lang.RunnableE)
 	 */
 	@Override
 	public <Ex extends Throwable> void transactionRun(Class<? extends Ex> eClass, RunnableE<? extends Ex> runnable) throws SQLException, Ex {
@@ -195,7 +195,7 @@ abstract public class DatabaseModel
 	}
 
 	/**
-	 * @see  Database#transactionRun(com.aoindustries.dbc.DatabaseRunnable)
+	 * @see  Database#transactionRun(com.aoapps.dbc.DatabaseRunnable)
 	 */
 	public void transactionRun(DatabaseRunnable runnable) throws SQLException {
 		Database database = transactionDatabase.get();
@@ -215,7 +215,7 @@ abstract public class DatabaseModel
 	}
 
 	/**
-	 * @deprecated  Please use {@link #transactionRun(com.aoindustries.dbc.DatabaseRunnable)}
+	 * @deprecated  Please use {@link #transactionRun(com.aoapps.dbc.DatabaseRunnable)}
 	 */
 	@Deprecated
 	@SuppressWarnings("overloads")
@@ -226,7 +226,7 @@ abstract public class DatabaseModel
 	/**
 	 * @param  <Ex>  An arbitrary exception type that may be thrown
 	 *
-	 * @see  Database#transactionRun(java.lang.Class, com.aoindustries.dbc.DatabaseRunnableE)
+	 * @see  Database#transactionRun(java.lang.Class, com.aoapps.dbc.DatabaseRunnableE)
 	 */
 	// TODO: Ex extends Throwable
 	public <Ex extends Exception> void transactionRun(Class<? extends Ex> eClass, DatabaseRunnableE<? extends Ex> runnable) throws SQLException, Ex {

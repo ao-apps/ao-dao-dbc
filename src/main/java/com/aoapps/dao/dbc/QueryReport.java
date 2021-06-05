@@ -20,13 +20,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-dbc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.dbc;
+package com.aoapps.dao.dbc;
 
-import com.aoindustries.collections.AoCollections;
-import com.aoindustries.dao.Report;
-import com.aoindustries.dbc.Database;
-import com.aoindustries.dbc.DatabaseConnection;
-import com.aoindustries.util.ErrorPrinter;
+import com.aoapps.collections.AoCollections;
+import com.aoapps.dao.Report;
+import com.aoapps.dbc.Database;
+import com.aoapps.dbc.DatabaseConnection;
+import com.aoapps.lang.util.ErrorPrinter;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,7 +67,7 @@ public abstract class QueryReport
 		/**
 		 * Gets the label from the report.
 		 *
-		 * @see QueryReport#getColumnLabel(com.aoindustries.dao.dbc.QueryReport.QueryColumn)
+		 * @see QueryReport#getColumnLabel(com.aoapps.dao.dbc.QueryReport.QueryColumn)
 		 */
 		@Override
 		public String getLabel() {
