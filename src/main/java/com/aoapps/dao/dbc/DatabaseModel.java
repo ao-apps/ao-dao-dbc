@@ -35,7 +35,7 @@ import java.sql.SQLException;
 /**
  * A base implementation of <code>DaoDatabase</code>.
  */
-abstract public class DatabaseModel
+public abstract class DatabaseModel
 	extends AbstractModel
 {
 
@@ -45,7 +45,7 @@ abstract public class DatabaseModel
 	 * Within a single transaction, however, the database returned must be the
 	 * same.
 	 */
-	abstract public Database getDatabase() throws SQLException;
+	public abstract Database getDatabase() throws SQLException;
 
 	/**
 	 * Uses a {@link ThreadLocal} to make sure an entire transaction is executed against the same
