@@ -111,7 +111,7 @@ public abstract class QueryReport
 	/**
 	 * @param params to substitute a parameter, provide the Parameter object.
 	 */
-	public QueryReport(Database database, String name, String sql, Object... params) {
+	protected QueryReport(Database database, String name, String sql, Object... params) {
 		this.database = database;
 		this.name = name;
 		this.sql = sql;
@@ -121,7 +121,7 @@ public abstract class QueryReport
 	/**
 	 * @param params to substitute a parameter, provide the Parameter object.
 	 */
-	public QueryReport(Database database, String name, String sql, Collection<?> params) {
+	protected QueryReport(Database database, String name, String sql, Collection<?> params) {
 		this(database, name, sql, params.toArray());
 	}
 
