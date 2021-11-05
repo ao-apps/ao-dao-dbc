@@ -121,7 +121,7 @@ public abstract class DatabaseModel
 	/**
 	 * @deprecated  Please use {@link #transactionCall(com.aoapps.dbc.DatabaseCallable)}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	@SuppressWarnings("overloads")
 	protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
 		return DatabaseModel.this.transactionCall(callable);
@@ -217,7 +217,7 @@ public abstract class DatabaseModel
 	/**
 	 * @deprecated  Please use {@link #transactionRun(com.aoapps.dbc.DatabaseRunnable)}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	@SuppressWarnings("overloads")
 	protected void executeTransaction(DatabaseRunnable runnable) throws SQLException {
 		DatabaseModel.this.transactionRun(runnable);
