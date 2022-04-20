@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2021  AO Industries, Inc.
+ * Copyright (C) 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,13 +21,13 @@
  * along with ao-dao-dbc.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.dao.dbc {
-	exports com.aoapps.dao.dbc;
-	// Direct
-	requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
-	requires com.aoapps.dao.api; // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
-	requires com.aoapps.dao.base; // <groupId>com.aoapps</groupId><artifactId>ao-dao-base</artifactId>
-	requires com.aoapps.dbc; // <groupId>com.aoapps</groupId><artifactId>ao-dbc</artifactId>
-	requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
-	// Java SE
-	requires java.sql;
+  exports com.aoapps.dao.dbc;
+  // Direct
+  requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
+  requires com.aoapps.dao.api; // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
+  requires com.aoapps.dao.base; // <groupId>com.aoapps</groupId><artifactId>ao-dao-base</artifactId>
+  requires com.aoapps.dbc; // <groupId>com.aoapps</groupId><artifactId>ao-dbc</artifactId>
+  requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+  // Java SE
+  requires java.sql;
 }
