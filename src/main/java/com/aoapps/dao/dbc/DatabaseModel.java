@@ -37,7 +37,7 @@ import java.sql.SQLException;
  * A base implementation of <code>DaoDatabase</code>.
  */
 public abstract class DatabaseModel
-  extends AbstractModel
+    extends AbstractModel
 {
 
   /**

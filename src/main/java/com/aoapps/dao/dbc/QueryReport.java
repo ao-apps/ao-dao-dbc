@@ -45,7 +45,7 @@ import java.util.Map;
  * A report that is obtained from a SQL query database.
  */
 public abstract class QueryReport
-  implements Report
+    implements Report
 {
 
   public static class QueryColumn implements Report.Column {
@@ -78,7 +78,7 @@ public abstract class QueryReport
     @Override
     public Report.Alignment getAlignment() {
       return alignment;
-     }
+    }
   }
 
   public static class ReportResult implements Report.Result {
@@ -183,11 +183,11 @@ public abstract class QueryReport
              * Substitute any parameters with the values provided.
              */
             Object[] sqlParams = new Object[params.length];
-            for (int i=0; i<params.length; i++) {
+            for (int i = 0; i < params.length; i++) {
               Object param = params[i];
               if (param instanceof Parameter) {
                 // Replace placeholder with value
-                Parameter reportParam = (Parameter)param;
+                Parameter reportParam = (Parameter) param;
                 String paramName = reportParam.getName();
                 param = parameterValues.get(paramName);
                 if (param == null) {
@@ -202,7 +202,7 @@ public abstract class QueryReport
               ResultSetMetaData meta = results.getMetaData();
               int numColumns = meta.getColumnCount();
               List<QueryColumn> columns = new ArrayList<>();
-              for (int columnIndex=1; columnIndex <= numColumns; columnIndex++) {
+              for (int columnIndex = 1; columnIndex <= numColumns; columnIndex++) {
                 final Alignment alignment;
                 switch (meta.getColumnType(columnIndex)) {
                   case Types.BIGINT :
@@ -228,12 +228,12 @@ public abstract class QueryReport
               List<List<Object>> tableData = new ArrayList<>();
               while (results.next()) {
                 List<Object> row = new ArrayList<>(numColumns);
-                for (int columnIndex=1; columnIndex <= numColumns; columnIndex++) {
+                for (int columnIndex = 1; columnIndex <= numColumns; columnIndex++) {
                   // Convert arrays to lists
                   Object value = results.getObject(columnIndex);
                   if (value instanceof Array) {
                     List<Object> values = new ArrayList<>();
-                    try (ResultSet arrayResults = ((Array)value).getResultSet()) {
+                    try (ResultSet arrayResults = ((Array) value).getResultSet()) {
                       while (arrayResults.next()) {
                         values.add(arrayResults.getObject(2));
                       }
@@ -245,8 +245,8 @@ public abstract class QueryReport
                 tableData.add(Collections.unmodifiableList(row));
               }
               return new ReportResult(
-                Collections.unmodifiableList(columns),
-                Collections.unmodifiableList(tableData)
+                  Collections.unmodifiableList(columns),
+                  Collections.unmodifiableList(tableData)
               );
             }
           } catch (Error | RuntimeException | SQLException e) {
