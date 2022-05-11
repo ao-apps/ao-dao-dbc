@@ -44,10 +44,11 @@ import java.util.Map;
 /**
  * A report that is obtained from a SQL query database.
  */
-public abstract class QueryReport
-    implements Report
-{
+public abstract class QueryReport implements Report {
 
+  /**
+   * A column obtained from a database query.
+   */
   public static class QueryColumn implements Report.Column {
 
     private final QueryReport report;
@@ -81,6 +82,9 @@ public abstract class QueryReport
     }
   }
 
+  /**
+   * A result obtained from a database query.
+   */
   public static class ReportResult implements Report.Result {
 
     private final List<QueryColumn> columns;
@@ -110,6 +114,8 @@ public abstract class QueryReport
   private final Object[] params;
 
   /**
+   * Construct a new query report.
+   *
    * @param params to substitute a parameter, provide the Parameter object.
    */
   protected QueryReport(Database database, String name, String sql, Object... params) {
@@ -120,6 +126,8 @@ public abstract class QueryReport
   }
 
   /**
+   * Construct a new query report.
+   *
    * @param params to substitute a parameter, provide the Parameter object.
    */
   protected QueryReport(Database database, String name, String sql, Collection<?> params) {
@@ -179,9 +187,9 @@ public abstract class QueryReport
         beforeQuery(parameterValues, conn);
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
           try {
-            /**
-             * Substitute any parameters with the values provided.
-             */
+            //
+            // Substitute any parameters with the values provided.
+            //
             Object[] sqlParams = new Object[params.length];
             for (int i = 0; i < params.length; i++) {
               Object param = params[i];
@@ -205,22 +213,22 @@ public abstract class QueryReport
               for (int columnIndex = 1; columnIndex <= numColumns; columnIndex++) {
                 final Alignment alignment;
                 switch (meta.getColumnType(columnIndex)) {
-                  case Types.BIGINT :
-                  case Types.DECIMAL :
-                  case Types.DOUBLE :
-                  case Types.FLOAT :
-                  case Types.INTEGER :
-                  case Types.NUMERIC :
-                  case Types.REAL :
-                  case Types.SMALLINT :
-                  case Types.TINYINT :
+                  case Types.BIGINT:
+                  case Types.DECIMAL:
+                  case Types.DOUBLE:
+                  case Types.FLOAT:
+                  case Types.INTEGER:
+                  case Types.NUMERIC:
+                  case Types.REAL:
+                  case Types.SMALLINT:
+                  case Types.TINYINT:
                     alignment = Alignment.right;
                     break;
-                  case Types.BOOLEAN :
-                  case Types.BIT :
+                  case Types.BOOLEAN:
+                  case Types.BIT:
                     alignment = Alignment.center;
                     break;
-                  default :
+                  default:
                     alignment = Alignment.left;
                 }
                 columns.add(new QueryColumn(this, meta.getColumnName(columnIndex), alignment));
@@ -250,7 +258,7 @@ public abstract class QueryReport
               );
             }
           } catch (Error | RuntimeException | SQLException e) {
-            ErrorPrinter.addSQL(e, pstmt);
+            ErrorPrinter.addSql(e, pstmt);
             throw e;
           }
         }

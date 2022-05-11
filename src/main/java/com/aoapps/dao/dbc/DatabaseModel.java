@@ -36,9 +36,7 @@ import java.sql.SQLException;
 /**
  * A base implementation of <code>DaoDatabase</code>.
  */
-public abstract class DatabaseModel
-    extends AbstractModel
-{
+public abstract class DatabaseModel extends AbstractModel {
 
   /**
    * Gets the underlying database that should be used at this moment in time.
@@ -56,6 +54,8 @@ public abstract class DatabaseModel
   protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
   /**
+   * {@inheritDoc}
+   *
    * @see  Database#transactionCall(com.aoapps.lang.concurrent.CallableE)
    */
   @Override
@@ -77,22 +77,24 @@ public abstract class DatabaseModel
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @param  <Ex>  An arbitrary exception type that may be thrown
    *
    * @see  Database#transactionCall(java.lang.Class, com.aoapps.lang.concurrent.CallableE)
    */
   @Override
-  public <V, Ex extends Throwable> V transactionCall(Class<? extends Ex> eClass, CallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
+  public <V, Ex extends Throwable> V transactionCall(Class<? extends Ex> exClass, CallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
     Database database = transactionDatabase.get();
     if (database != null) {
       // Reuse current database
-      return database.transactionCall(eClass, callable);
+      return database.transactionCall(exClass, callable);
     } else {
       // Get database
       database = getDatabase();
       try {
         transactionDatabase.set(database);
-        return database.transactionCall(eClass, callable);
+        return database.transactionCall(exClass, callable);
       } finally {
         transactionDatabase.remove();
       }
@@ -100,6 +102,8 @@ public abstract class DatabaseModel
   }
 
   /**
+   * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
+   *
    * @see  Database#transactionCall(com.aoapps.dbc.DatabaseCallable)
    */
   public <V> V transactionCall(DatabaseCallable<? extends V> callable) throws SQLException {
@@ -120,6 +124,8 @@ public abstract class DatabaseModel
   }
 
   /**
+   * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
+   *
    * @deprecated  Please use {@link #transactionCall(com.aoapps.dbc.DatabaseCallable)}
    */
   @Deprecated(forRemoval = true)
@@ -129,22 +135,24 @@ public abstract class DatabaseModel
   }
 
   /**
+   * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
+   *
    * @param  <Ex>  An arbitrary exception type that may be thrown
    *
    * @see  Database#transactionCall(java.lang.Class, com.aoapps.dbc.DatabaseCallableE)
    */
   // TODO: Ex extends Throwable
-  public <V, Ex extends Exception> V transactionCall(Class<? extends Ex> eClass, DatabaseCallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
+  public <V, Ex extends Exception> V transactionCall(Class<? extends Ex> exClass, DatabaseCallableE<? extends V, ? extends Ex> callable) throws SQLException, Ex {
     Database database = transactionDatabase.get();
     if (database != null) {
       // Reuse current database
-      return database.transactionCall(eClass, callable);
+      return database.transactionCall(exClass, callable);
     } else {
       // Get database
       database = getDatabase();
       try {
         transactionDatabase.set(database);
-        return database.transactionCall(eClass, callable);
+        return database.transactionCall(exClass, callable);
       } finally {
         transactionDatabase.remove();
       }
@@ -152,6 +160,8 @@ public abstract class DatabaseModel
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  Database#transactionRun(com.aoapps.lang.RunnableE)
    */
   @Override
@@ -173,22 +183,24 @@ public abstract class DatabaseModel
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @param  <Ex>  An arbitrary exception type that may be thrown
    *
    * @see  Database#transactionRun(java.lang.Class, com.aoapps.lang.RunnableE)
    */
   @Override
-  public <Ex extends Throwable> void transactionRun(Class<? extends Ex> eClass, RunnableE<? extends Ex> runnable) throws SQLException, Ex {
+  public <Ex extends Throwable> void transactionRun(Class<? extends Ex> exClass, RunnableE<? extends Ex> runnable) throws SQLException, Ex {
     Database database = transactionDatabase.get();
     if (database != null) {
       // Reuse current database
-      database.transactionRun(eClass, runnable);
+      database.transactionRun(exClass, runnable);
     } else {
       // Get database
       database = getDatabase();
       try {
         transactionDatabase.set(database);
-        database.transactionRun(eClass, runnable);
+        database.transactionRun(exClass, runnable);
       } finally {
         transactionDatabase.remove();
       }
@@ -196,6 +208,8 @@ public abstract class DatabaseModel
   }
 
   /**
+   * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
+   *
    * @see  Database#transactionRun(com.aoapps.dbc.DatabaseRunnable)
    */
   public void transactionRun(DatabaseRunnable runnable) throws SQLException {
@@ -216,6 +230,8 @@ public abstract class DatabaseModel
   }
 
   /**
+   * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
+   *
    * @deprecated  Please use {@link #transactionRun(com.aoapps.dbc.DatabaseRunnable)}
    */
   @Deprecated(forRemoval = true)
@@ -225,22 +241,24 @@ public abstract class DatabaseModel
   }
 
   /**
+   * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
+   *
    * @param  <Ex>  An arbitrary exception type that may be thrown
    *
    * @see  Database#transactionRun(java.lang.Class, com.aoapps.dbc.DatabaseRunnableE)
    */
   // TODO: Ex extends Throwable
-  public <Ex extends Exception> void transactionRun(Class<? extends Ex> eClass, DatabaseRunnableE<? extends Ex> runnable) throws SQLException, Ex {
+  public <Ex extends Exception> void transactionRun(Class<? extends Ex> exClass, DatabaseRunnableE<? extends Ex> runnable) throws SQLException, Ex {
     Database database = transactionDatabase.get();
     if (database != null) {
       // Reuse current database
-      database.transactionRun(eClass, runnable);
+      database.transactionRun(exClass, runnable);
     } else {
       // Get database
       database = getDatabase();
       try {
         transactionDatabase.set(database);
-        database.transactionRun(eClass, runnable);
+        database.transactionRun(exClass, runnable);
       } finally {
         transactionDatabase.remove();
       }
