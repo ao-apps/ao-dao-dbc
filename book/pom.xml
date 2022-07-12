@@ -29,7 +29,7 @@ along with ao-dao-dbc.  If not, see <https://www.gnu.org/licenses/>.
     <relativePath>../../../parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.aoapps</groupId><artifactId>ao-dao-dbc-book</artifactId><version>3.0.2</version>
+  <groupId>com.aoapps</groupId><artifactId>ao-dao-dbc-book</artifactId><version>3.0.2-POST-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <properties>
@@ -74,7 +74,7 @@ along with ao-dao-dbc.  If not, see <https://www.gnu.org/licenses/>.
     <connection>scm:git:git://github.com/ao-apps/ao-dao-dbc.git</connection>
     <developerConnection>scm:git:git@github.com:ao-apps/ao-dao-dbc.git</developerConnection>
     <url>https://github.com/ao-apps/ao-dao-dbc</url>
-    <tag>ao-dao-dbc-book-3.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
