@@ -240,13 +240,18 @@ public abstract class QueryReport implements Report {
                   // Convert arrays to lists
                   Object value = results.getObject(columnIndex);
                   if (value instanceof Array) {
-                    List<Object> values = new ArrayList<>();
-                    try (ResultSet arrayResults = ((Array) value).getResultSet()) {
-                      while (arrayResults.next()) {
-                        values.add(arrayResults.getObject(2));
+                    Array array = ((Array) value);
+                    try {
+                      List<Object> values = new ArrayList<>();
+                      try (ResultSet arrayResults = array.getResultSet()) {
+                        while (arrayResults.next()) {
+                          values.add(arrayResults.getObject(2));
+                        }
                       }
+                      value = AoCollections.optimalUnmodifiableList(values);
+                    } finally {
+                      array.free();
                     }
-                    value = AoCollections.optimalUnmodifiableList(values);
                   }
                   row.add(value);
                 }

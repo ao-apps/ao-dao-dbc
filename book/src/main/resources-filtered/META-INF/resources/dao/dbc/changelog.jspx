@@ -37,7 +37,7 @@ along with ao-dao-dbc.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T19:27:20-05:00"
-    dateModified="2021-07-20T03:44:30-05:00"
+    dateModified="2022-07-11T22:34:34-05:00"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -47,7 +47,11 @@ along with ao-dao-dbc.  If not, see <https://www.gnu.org/licenses/>.
         artifactId="@{documented.artifactId}"
         repository="@{nexusUrl}content/repositories/snapshots/"
         scmUrl="@{project.scm.url}"
-      />
+      >
+        <ul>
+          <li>Explicitly closing JDBC resources.</li>
+        </ul>
+      </changelog:release>
     </c:if>
 
     <changelog:release
