@@ -29,8 +29,8 @@ def upstreamProjects = [
 
   // Direct
   '../collections', // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
-  '../dao/api', // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
-  '../dao/base', // <groupId>com.aoapps</groupId><artifactId>ao-dao-base</artifactId>
+  'api', // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
+  'base', // <groupId>com.aoapps</groupId><artifactId>ao-dao-base</artifactId>
   '../dbc', // <groupId>com.aoapps</groupId><artifactId>ao-dbc</artifactId>
   '../lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
 ]
