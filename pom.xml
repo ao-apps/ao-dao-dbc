@@ -30,7 +30,7 @@ along with ao-dao-dbc.  If not, see <https://www.gnu.org/licenses/>.
   </parent>
 
   <groupId>com.aoapps</groupId><artifactId>ao-dao-dbc</artifactId><version>3.0.2-POST-SNAPSHOT</version>
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
 
   <properties>
     <module.name>com.aoapps.dao.dbc</module.name>
