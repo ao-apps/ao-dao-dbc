@@ -1,6 +1,6 @@
 /*
  * ao-dao-dbc - Simple data access objects framework implementation leveraging ao-dbc.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -276,9 +276,8 @@ public abstract class QueryReport implements Report {
   /**
    * Called before the query is executed, this may setup any temp tables or views that are required
    * by the main query.
-   * <p>
-   * This default implementation does nothing.
-   * </p>
+   *
+   * <p>This default implementation does nothing.</p>
    *
    * @see  #afterQuery(java.util.Map, java.sql.Connection)
    */
@@ -291,9 +290,8 @@ public abstract class QueryReport implements Report {
    * Called in try/finally after the query is executed, this may release any temp tables or views that were setup
    * by {@link #beforeQuery(java.util.Map, java.sql.Connection)}.  This will be called even when the beforeQuery does
    * not complete fully, and the conn may already be closed or otherwise in an invalid state.
-   * <p>
-   * This default implementation does nothing.
-   * </p>
+   *
+   * <p>This default implementation does nothing.</p>
    *
    * @see  #beforeQuery(java.util.Map, java.sql.Connection)
    */
