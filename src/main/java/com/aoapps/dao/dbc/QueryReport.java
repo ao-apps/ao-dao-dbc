@@ -279,7 +279,7 @@ public abstract class QueryReport implements Report {
    *
    * <p>This default implementation does nothing.</p>
    *
-   * @see  #afterQuery(java.util.Map, java.sql.Connection)
+   * @see  QueryReport#afterQuery(java.util.Map, java.sql.Connection)
    */
   @SuppressWarnings("NoopMethodInAbstractClass")
   public void beforeQuery(Map<String, ? extends Object> parameterValues, Connection conn) throws SQLException {
@@ -288,12 +288,12 @@ public abstract class QueryReport implements Report {
 
   /**
    * Called in try/finally after the query is executed, this may release any temp tables or views that were setup
-   * by {@link #beforeQuery(java.util.Map, java.sql.Connection)}.  This will be called even when the beforeQuery does
+   * by {@link QueryReport#beforeQuery(java.util.Map, java.sql.Connection)}.  This will be called even when the beforeQuery does
    * not complete fully, and the conn may already be closed or otherwise in an invalid state.
    *
    * <p>This default implementation does nothing.</p>
    *
-   * @see  #beforeQuery(java.util.Map, java.sql.Connection)
+   * @see  QueryReport#beforeQuery(java.util.Map, java.sql.Connection)
    */
   @SuppressWarnings("NoopMethodInAbstractClass")
   public void afterQuery(Map<String, ? extends Object> parameterValues, Connection conn) throws SQLException {

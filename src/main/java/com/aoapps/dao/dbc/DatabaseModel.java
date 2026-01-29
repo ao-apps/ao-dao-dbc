@@ -126,7 +126,7 @@ public abstract class DatabaseModel extends AbstractModel {
   /**
    * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
    *
-   * @deprecated  Please use {@link #transactionCall(com.aoapps.dbc.DatabaseCallable)}
+   * @deprecated  Please use {@link DatabaseModel#transactionCall(com.aoapps.dbc.DatabaseCallable)}
    */
   @Deprecated(forRemoval = true)
   @SuppressWarnings("overloads")
@@ -232,7 +232,7 @@ public abstract class DatabaseModel extends AbstractModel {
   /**
    * Executes an arbitrary transaction, providing automatic commit, rollback, and connection management.
    *
-   * @deprecated  Please use {@link #transactionRun(com.aoapps.dbc.DatabaseRunnable)}
+   * @deprecated  Please use {@link DatabaseModel#transactionRun(com.aoapps.dbc.DatabaseRunnable)}
    */
   @Deprecated(forRemoval = true)
   @SuppressWarnings("overloads")
